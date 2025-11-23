@@ -2,47 +2,63 @@
     margin:0;
     padding:0;
 }
-
 .navbar {
-  height:60px;
-  overflow: hidden;
-  background-color: #000000;
-  width:100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  background-color: #5B2E91; /* primary purple */
+  width: 100%;
+  padding: 0 12px;
+  box-sizing: border-box;
+  font-family: times;
 }
-
+.navleft {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: white;
+  padding: 0;
+  text-decoration: none;
+}
+.navright {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
 .navbar a {
   font-size: 25px;
-  color: #ffffff;
+  color: #ffffff; /* keep links white */
   text-align: center;
-  padding: 14px 16px;
+  padding: 12px 14px;
   text-decoration: none;
 }
 
 .dropdown {
-  overflow: hidden;
+  position: relative;
+  display: inline-block;
 }
 
 .dropdown .dropbtn {
-  font-size: 16px;  
+  font-size: 25px;
   border: none;
   outline: none;
-  color: rgb(255, 253, 253);
-  padding: 14px 16px;
+  color: #ffffff;
+  padding: 12px 14px;
   background-color: inherit;
-  font-family: inherit;
+  font-family: times;
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: #000000;
-  height:100%
+  background-color: rgba(255,255,255,0.06); /* subtle white hover */
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: -#ffffff;
+  background-color: #5B2E91; /* purple dropdown */
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 24px 0px rgba(91,46,145,0.12);
   z-index: 1;
 }
 
@@ -56,13 +72,68 @@
 }
 
 .dropdown-content a:hover {
-  background-color:#000000;
+  background-color: rgba(255,255,255,0.14);
+  color: #3a1d5f;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-.navbar .navright {
-    float: right;
+/* Sign-in / Sign-up box styles */
+.signinbox {
+  max-width: 420px;
+  margin: 72px auto;
+  background: #fff;
+  padding: 28px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(91,46,145,0.08);
+  color: #222;
 }
+.signinbox h1 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.signinbox label {
+  display: block;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.signinbox input[type="text"],
+.signinbox input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.primary-btn {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px 12px;
+  background-color: #5B2E91; /* purple */
+  color: #ffffff; /* white text */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.primary-btn:hover { background-color: #4a2373; }
+.signinbox .small { text-align: center; margin-top: 12px; }
+.signinbox a { color: #10361e; text-decoration: none; }
+.signinbox a:hover { text-decoration: underline; }
+
+/* Page background and typography */
+body { background: linear-gradient(180deg,#f3eaff,#ffffff); font-family: Arial, sans-serif; }
+
+/* Inline form messages (errors/success) */
+.form-message { margin-top: 10px; font-size: 14px; min-height: 18px; }
+
+@media (max-width:480px){
+  .signinbox{ margin: 36px 16px; padding: 18px; }
+}
+
