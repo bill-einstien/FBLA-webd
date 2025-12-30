@@ -128,7 +128,7 @@
 .signinbox a:hover { text-decoration: underline; }
 
 /* Page background and typography */
-body { background: linear-gradient(180deg,#f3eaff,#ffffff); font-family: Arial, sans-serif; }
+body { background: #ffffff; font-family: Arial, sans-serif; }
 
 /* Inline form messages (errors/success) */
 .form-message { margin-top: 10px; font-size: 14px; min-height: 18px; }
