@@ -24,20 +24,23 @@
       const username = signupForm.querySelector('#username').value.trim();
       const password = signupForm.querySelector('#password').value;
       const confirm = signupForm.querySelector('#confirm').value;
+      const roleEl = signupForm.querySelector('input[name="role"]:checked');
+      const role = roleEl ? roleEl.value : 'student';
 
       if(!username) return showMessage(signupForm, 'Please enter a username.');
       if(password.length < 6) return showMessage(signupForm, 'Password must be at least 6 characters.');
       if(password !== confirm) return showMessage(signupForm, 'Passwords do not match.');
 
-      const users = JSON.parse(localStorage.getItem('fbla_users') || '[]');
+      const users = JSON.parse(localStorage.getItem('chem_users') || '[]');
       if(users.find(u => u.username.toLowerCase() === username.toLowerCase())){
         return showMessage(signupForm, 'That username is already taken.');
       }
 
-      users.push({ username: username, password: password });
-      localStorage.setItem('fbla_users', JSON.stringify(users));
+      users.push({ username: username, password: password, role: role });
+      localStorage.setItem('chem_users', JSON.stringify(users));
 
-      showMessage(signupForm, 'Account created — redirecting to login...', 'success');
+      const message = role === 'tutor' ? 'Tutor account created — please log in to complete your tutor profile.' : 'Account created — redirecting to login...';
+      showMessage(signupForm, message, 'success');
       setTimeout(() => window.location.href = 'login.html', 900);
     });
   }
@@ -53,11 +56,11 @@
       if(!username) return showMessage(loginForm, 'Please enter your username.');
       if(!password) return showMessage(loginForm, 'Please enter your password.');
 
-      const users = JSON.parse(localStorage.getItem('fbla_users') || '[]');
+      const users = JSON.parse(localStorage.getItem('chem_users') || '[]');
       const found = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
       if(!found) return showMessage(loginForm, 'Invalid username or password.');
 
-      localStorage.setItem('fbla_current', JSON.stringify({ username: found.username }));
+      localStorage.setItem('chem_current', JSON.stringify({ username: found.username }));
       showMessage(loginForm, 'Login successful — redirecting...', 'success');
       setTimeout(() => window.location.href = 'index.html', 700);
     });
@@ -67,12 +70,12 @@
   (function initNav(){
     const navRight = document.getElementById('navright');
     if(!navRight) return;
-    const cur = JSON.parse(localStorage.getItem('fbla_current') || 'null');
+    const cur = JSON.parse(localStorage.getItem('chem_current') || 'null');
     if(cur && cur.username){
       navRight.innerHTML = '\n        <div class="dropdown">\n          <button class="dropbtn">Account (' + esc(cur.username) + ')</button>\n          <div class="dropdown-content">\n            <a href="profile.html">Profile</a>\n            <a href="#" id="logoutBtn">Logout</a>\n          </div>\n        </div>';
       const logout = document.getElementById('logoutBtn');
       if(logout){
-        logout.addEventListener('click', function(e){ e.preventDefault(); localStorage.removeItem('fbla_current'); location.reload(); });
+        logout.addEventListener('click', function(e){ e.preventDefault(); localStorage.removeItem('chem_current'); location.reload(); });
       }
     } else {
       navRight.innerHTML = '<a href="login.html" class="button">Login</a><a href="signin.html" class="nav-link">Sign up</a>';
@@ -83,7 +86,7 @@
   (function initProfile(){
     const area = document.getElementById('profileArea');
     if(!area) return;
-    const cur = JSON.parse(localStorage.getItem('fbla_current') || 'null');
+    const cur = JSON.parse(localStorage.getItem('chem_current') || 'null');
     const logoutBtn = document.getElementById('logoutNow');
     if(!cur || !cur.username){
       area.innerHTML = '<p>You are not logged in. <a href="login.html">Log in</a></p>';
@@ -94,7 +97,7 @@
     const safe = String(cur.username).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     area.innerHTML = '<p><strong>Username:</strong> ' + safe + '</p>';
     if(logoutBtn){
-      logoutBtn.addEventListener('click', function(){ localStorage.removeItem('fbla_current'); window.location.href = 'index.html'; });
+      logoutBtn.addEventListener('click', function(){ localStorage.removeItem('chem_current'); window.location.href = 'index.html'; });
     }
   })();
 
@@ -105,10 +108,10 @@
     {id: '1-3', title: 'Lesson 1.3 — Atomic Models', description: 'Explore Bohr, Rutherford, and modern atomic models.', objectives: ['Compare historical atomic models','Relate models to experimental evidence']}
   ];
 
-  function getCurrentUser(){ const cur = JSON.parse(localStorage.getItem('fbla_current') || 'null'); return cur && cur.username ? cur.username : null; }
+  function getCurrentUser(){ const cur = JSON.parse(localStorage.getItem('chem_current') || 'null'); return cur && cur.username ? cur.username : null; }
 
-  function getProgress(){ const user = getCurrentUser(); if(!user) return {}; return JSON.parse(localStorage.getItem('fbla_progress_' + user) || '{}'); }
-  function saveProgress(p){ const user = getCurrentUser(); if(!user){ alert('Please log in to track progress.'); window.location.href = 'login.html'; return; } localStorage.setItem('fbla_progress_' + user, JSON.stringify(p)); }
+  function getProgress(){ const user = getCurrentUser(); if(!user) return {}; return JSON.parse(localStorage.getItem('chem_progress_' + user) || '{}'); }
+  function saveProgress(p){ const user = getCurrentUser(); if(!user){ alert('Please log in to track progress.'); window.location.href = 'login.html'; return; } localStorage.setItem('chem_progress_' + user, JSON.stringify(p)); }
 
   function toggleLesson(id){
     const user = getCurrentUser();
@@ -118,10 +121,23 @@
     saveProgress(p);
     updateLessonsUI();
     updateProgressUI();
+    const detailBtn = document.getElementById('lessonMark');
+    if(detailBtn){
+      const p2 = getProgress();
+      if(p2[id]){
+        detailBtn.textContent = 'Completed';
+        detailBtn.classList.add('completed');
+        detailBtn.setAttribute('aria-pressed','true');
+      } else {
+        detailBtn.textContent = 'Mark complete';
+        detailBtn.classList.remove('completed');
+        detailBtn.setAttribute('aria-pressed','false');
+      }
+    }
   }
 
   function updateLessonsUI(){
-    const items = document.querySelectorAll('.lesson-item');
+    const items = document.querySelectorAll('[data-lesson]');
     const p = getProgress();
     const user = getCurrentUser();
     items.forEach(li => {
@@ -145,21 +161,38 @@
   function updateProgressUI(){
     const pctEl = document.getElementById('progressPercent');
     const listEl = document.getElementById('completedList');
-    if(!pctEl || !listEl) return;
+    const barEl = document.getElementById('progressBarFill');
+    if(!pctEl || !listEl || !barEl) return;
     const user = getCurrentUser();
-    if(!user){ pctEl.textContent = '— (log in)'; listEl.innerHTML = '<li>Please log in to view progress and track lessons.</li>'; return; }
+    if(!user){
+      pctEl.textContent = '— (log in)';
+      listEl.innerHTML = '<li>Please log in to view progress and track lessons.</li>';
+      barEl.style.width = '0%';
+      barEl.setAttribute('aria-valuenow', '0');
+      barEl.setAttribute('title','Log in to see progress');
+      return;
+    }
     const p = getProgress();
     const completed = LESSONS.filter(l => p[l.id]);
-    const percent = Math.round((completed.length / LESSONS.length) * 100);
+    const percent = LESSONS.length ? Math.round((completed.length / LESSONS.length) * 100) : 0;
     pctEl.textContent = percent + '%';
     listEl.innerHTML = completed.length ? completed.map(l=>'<li>'+l.title+'</li>').join('') : '<li>No lessons completed yet</li>';
+    // Update the progress bar fill and accessibility attributes
+    barEl.style.width = percent + '%';
+    barEl.setAttribute('aria-valuenow', String(percent));
+    barEl.setAttribute('title', percent + '% complete');
   }
 
   (function initLessonsPage(){
-    const list = document.getElementById('lessonsList');
+    const list = document.getElementById('lessonsList') || document.getElementById('lessonsGrid');
     if(!list) return;
     list.querySelectorAll('.mark-btn').forEach(btn => {
-      btn.addEventListener('click', function(){ const id = this.closest('.lesson-item').dataset.lesson; toggleLesson(id); });
+      btn.addEventListener('click', function(){
+        const container = this.closest('[data-lesson]');
+        if(!container) return;
+        const id = container.dataset.lesson;
+        toggleLesson(id);
+      });
     });
     updateLessonsUI();
   })();
@@ -205,40 +238,156 @@
   })();
 
   // Groups (create & join)
-  function getGroups(){ return JSON.parse(localStorage.getItem('fbla_groups') || '[]'); }
-  function saveGroups(g){ localStorage.setItem('fbla_groups', JSON.stringify(g)); }
+  function getGroups(){ return JSON.parse(localStorage.getItem('chem_groups') || '[]'); }
+  function saveGroups(g){ localStorage.setItem('chem_groups', JSON.stringify(g)); }
 
   function renderGroupsList(){
     const list = document.getElementById('groupList');
     if(!list) return;
     const groups = getGroups();
     const user = getCurrentUser();
+
     if(!groups.length){ list.innerHTML = '<li>No groups yet</li>'; return; }
-    list.innerHTML = groups.map(g => {
+
+    // optional 'upcoming within 7 days' filter
+    const upcomingOnly = !!document.getElementById('upcomingFilter') && document.getElementById('upcomingFilter').checked;
+    const now = new Date();
+    const in7 = new Date(now.getTime() + (7 * 24 * 60 * 60 * 1000));
+
+    list.innerHTML = groups.filter(g => {
+      if(!upcomingOnly) return true;
+      if(!g.meeting || !g.meeting.date) return false;
+      const dt = new Date(g.meeting.date + 'T' + (g.meeting.time || '00:00'));
+      return dt >= now && dt <= in7;
+    }).map(g => {
       if(!Array.isArray(g.members)) g.members = [];
       const joined = user && g.members.includes(user);
       const count = Array.isArray(g.members) ? g.members.length : (g.members || 0);
-      return '<li>'+g.name+' — '+count+' members — <button class="join-group" data-group="'+g.name+'"'+(joined? ' disabled title="You joined"' : '')+'>'+ (joined? 'Joined' : 'Join') +'</button></li>';
+      const owner = g.owner || 'unknown';
+      const subject = g.subject ? ('<div class="muted">Subject: ' + (g.subject) + '</div>') : '';
+      let meeting = '';
+      if(g.meeting && g.meeting.date){
+        const t = g.meeting.time ? (' @ ' + g.meeting.time) : '';
+        meeting = '<div class="muted">Next meeting: ' + g.meeting.date + t + (g.meeting.link ? (' — <a href="' + g.meeting.link + '" target="_blank">Link</a>') : '') + '</div>';
+      }
+      const deleteBtn = (user && g.owner === user) ? (' <button class="delete-group" data-id="'+g.id+'">Delete</button>') : '';
+      return '<li data-id="'+g.id+'"><strong>'+esc(g.name)+'</strong> — <em>'+esc(owner)+'</em> — '+count+' members '+deleteBtn+'<div style="margin-top:6px">'+subject+meeting+'</div><div style="margin-top:6px"><button class="join-group" data-id="'+g.id+'"'+(joined? ' disabled title="You joined"' : '')+'>'+ (joined? 'Joined' : 'Join') +'</button></div></li>';
     }).join('');
-    list.querySelectorAll('.join-group').forEach(btn => btn.addEventListener('click', function(){ joinGroup(this.dataset.group); }));
+
+    list.querySelectorAll('.join-group').forEach(btn => btn.addEventListener('click', function(){ joinGroupById(this.dataset.id); }));
+    list.querySelectorAll('.delete-group').forEach(btn => btn.addEventListener('click', function(){ deleteGroup(this.dataset.id); }));
   }
 
-  function joinGroup(name){ const user = getCurrentUser(); if(!user){ alert('Please log in to join groups.'); window.location.href = 'login.html'; return; } const groups = getGroups(); const g = groups.find(x=> x.name===name); if(!g) return; if(!Array.isArray(g.members)) g.members = []; if(g.members.includes(user)){ alert('You already joined ' + name); return; } g.members.push(user); saveGroups(groups); renderGroupsList(); alert('Joined ' + name); }
+  function joinGroupById(id){ const user = getCurrentUser(); if(!user){ alert('Please log in to join groups.'); window.location.href = 'login.html'; return; } const groups = getGroups(); const g = groups.find(x=> x.id===id); if(!g) return; if(!Array.isArray(g.members)) g.members = []; if(g.members.includes(user)){ alert('You already joined ' + g.name); return; } g.members.push(user); saveGroups(groups); renderGroupsList(); alert('Joined ' + g.name); }
 
-  (function initCreateGroupPage(){ const form = document.getElementById('createGroupForm'); if(!form) return; form.addEventListener('submit', function(e){ e.preventDefault(); const user = getCurrentUser(); if(!user){ alert('Please log in to create a group.'); window.location.href = 'login.html'; return; } const name = form.querySelector('#groupName').value.trim(); const subject = form.querySelector('#groupSubject').value.trim(); if(!name){ alert('Please enter a group name'); return; } const groups = getGroups(); groups.push({ name, subject, members: [user] }); saveGroups(groups); form.reset(); renderGroupsList(); alert('Group created: ' + name); }); })();
+  function deleteGroup(id){ const user = getCurrentUser(); const groups = getGroups(); const g = groups.find(x=> x.id===id); if(!g) return; if(g.owner !== user){ alert('Only the owner can delete this group.'); return; } if(!confirm('Delete group "' + g.name + '"?')) return; const idx = groups.findIndex(x=> x.id===id); if(idx >= 0) groups.splice(idx,1); saveGroups(groups); renderGroupsList(); alert('Group deleted.'); }
 
-  (function initJoinGroupPage(){ renderGroupsList(); })();
+  (function initCreateGroupPage(){
+    const form = document.getElementById('createGroupForm');
+    if(!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const user = getCurrentUser();
+      if(!user){ alert('Please log in to create a group.'); window.location.href = 'login.html'; return; }
+      const name = form.querySelector('#groupName').value.trim();
+      const subject = form.querySelector('#groupSubject').value.trim();
+      const meetingDate = form.querySelector('#meetingDate').value || null;
+      const meetingTime = form.querySelector('#meetingTime').value || null;
+      const meetingRecurrence = form.querySelector('#meetingRecurrence').value || 'none';
+      const meetingLink = form.querySelector('#meetingLink').value.trim() || null;
+      if(!name){ alert('Please enter a group name'); return; }
 
-  // Tutors
-  const TUTORS = [
-    {id:'t1', name:'Alex Chen', subjects:'Chemistry, AP Chem', rate:'$30/hr', rating:4.8, email:'alex@example.com'},
-    {id:'t2', name:'Morgan Patel', subjects:'General Chemistry, Stoichiometry', rate:'$25/hr', rating:4.6, email:'morgan@example.com'}
-  ];
+      const groups = getGroups();
+      if(groups.find(g => g.name.toLowerCase() === name.toLowerCase())){ alert('A group with that name already exists. Choose another name.'); return; }
 
-  function renderTutors(){ const el = document.getElementById('tutorList'); if(!el) return; const user = getCurrentUser(); const bookings = JSON.parse(localStorage.getItem('fbla_bookings')||'[]'); el.innerHTML = TUTORS.map(t => { const booked = user && bookings.find(b => b.tutor === t.name && b.user === user); return '<div class="tutor-card" data-id="'+t.id+'">' + '<h4>'+t.name+'</h4><p>'+t.subjects+'</p><p>Rating: '+t.rating+' • '+t.rate+'</p><p><button class="book-btn" data-id="'+t.id+'"'+(booked? ' disabled title="Already booked"' : '')+'>'+ (booked? 'Booked' : 'Book') +'</button></p></div>'; }).join(''); el.querySelectorAll('.book-btn').forEach(b => b.addEventListener('click', function(){ bookTutor(this.dataset.id); })); }
+      const newGroup = {
+        id: 'g_' + Date.now(),
+        name,
+        subject,
+        owner: user,
+        members: [user],
+        meeting: meetingDate ? { date: meetingDate, time: meetingTime, recurrence: meetingRecurrence, link: meetingLink } : null
+      };
+      groups.push(newGroup);
+      saveGroups(groups);
+      form.reset();
+      renderGroupsList();
+      alert('Group created: ' + name);
+    });
+  })();
 
-  function bookTutor(id){ const user = getCurrentUser(); if(!user){ alert('Please log in to book tutors.'); window.location.href = 'login.html'; return; } const tutor = TUTORS.find(t => t.id === id); if(!tutor) return; const bookings = JSON.parse(localStorage.getItem('fbla_bookings')||'[]'); if(bookings.find(b => b.tutor === tutor.name && b.user === user)){ alert('You already have a booking with ' + tutor.name); return; } bookings.push({ tutor: tutor.name, time: new Date().toISOString(), user }); localStorage.setItem('fbla_bookings', JSON.stringify(bookings)); alert('Booked ' + tutor.name); }
+  (function initJoinGroupPage(){ renderGroupsList(); const upcoming = document.getElementById('upcomingFilter'); if(upcoming) upcoming.addEventListener('change', renderGroupsList); })();
 
-  (function initTutorsPage(){ renderTutors(); })();
+  // Tutors (only persisted tutor profiles created by users)
+  function getStoredTutors(){ return JSON.parse(localStorage.getItem('chem_tutors') || '[]'); }
+  function saveStoredTutors(arr){ localStorage.setItem('chem_tutors', JSON.stringify(arr)); }
+  function getAllTutors(){ return getStoredTutors(); }
+
+  function renderTutors(){
+    const el = document.getElementById('tutorList'); if(!el) return;
+    const user = getCurrentUser();
+    const bookings = JSON.parse(localStorage.getItem('chem_bookings')||'[]');
+    const tutors = getAllTutors();
+
+    if(!tutors.length){ el.innerHTML = '<p>No tutors available yet. <a href="signin.html">Sign up</a> to create a tutor profile.</p>'; return; }
+
+    el.innerHTML = tutors.map(t => {
+      const booked = user && bookings.find(b => b.tutor === t.name && b.user === user);
+      const ownerNote = t.owner ? ('<div class="muted">Profile by: ' + esc(t.owner) + '</div>') : '';
+      return '<div class="tutor-card" data-id="'+t.id+'">' + '<h4>'+esc(t.name)+'</h4><p>'+esc(t.subjects)+'</p><p>' + (t.rating ? ('Rating: '+t.rating+' • ') : '') + esc(t.rate || '') + '</p>' + ownerNote + '<p><button class="book-btn" data-id="'+t.id+'"'+(booked? ' disabled title="Already booked"' : '')+'>'+ (booked? 'Booked' : 'Book') +'</button></p></div>';
+    }).join('');
+
+    el.querySelectorAll('.book-btn').forEach(b => b.addEventListener('click', function(){ bookTutor(this.dataset.id); }));
+  }
+
+  function bookTutor(id){
+    const user = getCurrentUser(); if(!user){ alert('Please log in to book tutors.'); window.location.href = 'login.html'; return; }
+    const tutors = getAllTutors(); const tutor = tutors.find(t => t.id === id); if(!tutor){ alert('Tutor not found.'); return; }
+    const bookings = JSON.parse(localStorage.getItem('chem_bookings')||'[]');
+    if(bookings.find(b => b.tutor === tutor.name && b.user === user)){ alert('You already have a booking with ' + tutor.name); return; }
+    bookings.push({ tutor: tutor.name, time: new Date().toISOString(), user }); localStorage.setItem('chem_bookings', JSON.stringify(bookings)); alert('Booked ' + tutor.name);
+  }
+
+  (function initTutorsPage(){
+    renderTutors();
+    const area = document.getElementById('myTutorArea');
+    if(!area) return;
+    const cur = getCurrentUser();
+    if(!cur){ area.innerHTML = '<p><a href="login.html">Log in</a> to create a tutor profile.</p>'; return; }
+    const users = JSON.parse(localStorage.getItem('chem_users')||'[]');
+    const me = users.find(u => u.username === cur);
+    const stored = getStoredTutors();
+    const myProfile = stored.find(t => t.owner === cur);
+
+    if(!me || me.role !== 'tutor'){
+      area.innerHTML = '<p>Want to teach? <a href="signin.html">Sign up</a> and select "Tutor" as account type.</p>';
+      return;
+    }
+
+    if(myProfile){
+      area.innerHTML = '<h3>Your Tutor Profile</h3><div class="resource-card"><strong>'+esc(myProfile.name)+'</strong><div class="muted">Subjects: '+esc(myProfile.subjects)+'</div><div>'+esc(myProfile.rate || '')+'</div><div style="margin-top:8px"><button id="editTutor">Edit</button> <button id="removeTutor">Remove</button></div></div>';
+      document.getElementById('editTutor').addEventListener('click', function(){ area.innerHTML = renderTutorForm(myProfile); bindTutorForm(area, myProfile); });
+      document.getElementById('removeTutor').addEventListener('click', function(){ if(!confirm('Remove your tutor profile?')) return; const idx = stored.findIndex(t => t.owner === cur); if(idx >=0){ stored.splice(idx,1); saveStoredTutors(stored); area.innerHTML = '<p>Your tutor profile was removed.</p>'; renderTutors(); } });
+    } else {
+      area.innerHTML = renderTutorForm(); bindTutorForm(area, null);
+    }
+
+    function renderTutorForm(data){ data = data || {}; return '<form id="tutorForm" class="resource-card"><label>Name<br><input id="tutorName" value="'+esc(data.name||cur)+'"></label><br><label>Subjects (comma separated)<br><input id="tutorSubjects" value="'+esc(data.subjects||'')+'"></label><br><label>Rate (e.g. $30/hr)<br><input id="tutorRate" value="'+esc(data.rate||'')+'"></label><br><label>Email<br><input id="tutorEmail" value="'+esc(data.email||'')+'"></label><br><input type="submit" class="primary-btn" value="'+(data.id? 'Update Profile' : 'Create Profile')+'"></form>'; }
+    function bindTutorForm(container, existing){
+      const form = container.querySelector('#tutorForm');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const name = form.querySelector('#tutorName').value.trim();
+        const subjects = form.querySelector('#tutorSubjects').value.trim();
+        const rate = form.querySelector('#tutorRate').value.trim();
+        const email = form.querySelector('#tutorEmail').value.trim();
+        if(!name || !subjects){ alert('Please provide a name and subjects.'); return; }
+        const stored = getStoredTutors();
+        if(existing){ const t = stored.find(x => x.owner === cur); if(t){ t.name = name; t.subjects = subjects; t.rate = rate; t.email = email; saveStoredTutors(stored); area.innerHTML = '<p>Profile updated.</p>'; renderTutors(); return; } }
+        else { const newTutor = { id: 'ut_' + Date.now(), name, subjects, rate, rating: 0, email, owner: cur }; stored.push(newTutor); saveStoredTutors(stored); area.innerHTML = '<p>Profile created.</p>'; renderTutors(); }
+      });
+    }
+
+  })();
 
 })();

@@ -3,15 +3,48 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Progress</title>
+        <title>Cheminuity — Progress</title>
         <link rel="stylesheet" href="Style.css">
     </head>
     <body>
         <div class="navbar">
             <div class="navleft">
-                <a href="index.html">Home</a>
+                <a href="index.html" class="brand">Cheminuity</a>
+                <div class="dropdown">
+                    <button class="dropbtn"> Dashboard </button>
+                    <div class="dropdown-content">
+                        <a href="progress.html"> Progress </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"> Content </button>
+                    <div class="dropdown-content">
+                        <a href="lessons.html"> Lessons </a>
+                        <a href="quizzes.html"> Quizzes </a>
+                        <a href="videos.html"> Videos </a>
+                        <a href="resources.html"> Resources </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"> Study Groups</button>
+                    <div class="dropdown-content">
+                        <a href="createsg.html"> Find a Study Group </a>
+                        <a href="joinsg.html"> Join a Study Group </a>
+
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Tutor </button>
+                    <div class="dropdown-content">
+                        <a href="findt.html"> Create a Tutor </a>
+                        <a href="tutorprofiles.html"> Tutor Profiles </a>
+                    </div>
+                </div>
             </div>
-            <div class="navright" id="navright"></div>
+            <div class ="navright" id="navright">
+                <a href="login.html" class="button">Login</a>
+                <a href="signin.html" class="nav-link">Sign up</a>
+            </div>
         </div>
 
         <div class="bodycontent container">
@@ -20,7 +53,7 @@
                 <div class="card" style="flex:1">
                     <h3>Overall progress</h3>
                     <div style="margin-top:8px">Completed: <strong id="progressPercent">0%</strong></div>
-                    <div class="progress-bar" style="margin-top:8px"><i id="progressBarFill"></i></div>
+                    <div class="progress-bar" style="margin-top:8px"><i id="progressBarFill" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" title="0% complete"></i></div>
                     <h4 style="margin-top:12px">Completed lessons</h4>
                     <ul id="completedList"><li>No lessons completed yet</li></ul>
                 </div>

@@ -3,21 +3,55 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tutor Profiles</title>
+        <title>Cheminuity — Tutors</title>
         <link rel="stylesheet" href="Style.css">
     </head>
     <body>
         <div class="navbar">
             <div class="navleft">
-                <a href="index.html">Home</a>
+                <a href="index.html" class="brand">Cheminuity</a>
+                <div class="dropdown">
+                    <button class="dropbtn"> Dashboard </button>
+                    <div class="dropdown-content">
+                        <a href="progress.html"> Progress </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"> Content </button>
+                    <div class="dropdown-content">
+                        <a href="lessons.html"> Lessons </a>
+                        <a href="quizzes.html"> Quizzes </a>
+                        <a href="videos.html"> Videos </a>
+                        <a href="resources.html"> Resources </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"> Study Groups</button>
+                    <div class="dropdown-content">
+                        <a href="createsg.html"> Find a Study Group </a>
+                        <a href="joinsg.html"> Join a Study Group </a>
+
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Tutor </button>
+                    <div class="dropdown-content">
+                        <a href="findt.html"> Create a Tutor </a>
+                        <a href="tutorprofiles.html"> Tutor Profiles </a>
+                    </div>
+                </div>
             </div>
-            <div class="navright" id="navright"></div>
+            <div class ="navright" id="navright">
+                <a href="login.html" class="button">Login</a>
+                <a href="signin.html" class="nav-link">Sign up</a>
+            </div>
         </div>
 
-        <div class="bodycontent">
+        <div class="bodycontent container">
             <h1>Tutor Profiles</h1>
             <p>Browse tutor profiles — subjects, ratings, hourly rate, and contact.</p>
-            <div id="tutorList" style="margin-top:12px">
+            <section id="myTutorArea" style="margin-top:12px"></section>
+            <div id="tutorList" class="tutor-grid" style="margin-top:12px">
                 <!-- Tutor cards will be rendered here -->
             </div>
         </div>

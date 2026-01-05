@@ -9,15 +9,51 @@
     <body>
         <div class="navbar">
             <div class="navleft">
-                <a href="index.html">Home</a>
+                <a href="index.html" class="brand">Cheminuity</a>
+                <div class="dropdown">
+                    <button class="dropbtn"> Dashboard </button>
+                    <div class="dropdown-content">
+                        <a href="progress.html"> Progress </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"> Content </button>
+                    <div class="dropdown-content">
+                        <a href="lessons.html"> Lessons </a>
+                        <a href="quizzes.html"> Quizzes </a>
+                        <a href="videos.html"> Videos </a>
+                        <a href="resources.html"> Resources </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"> Study Groups</button>
+                    <div class="dropdown-content">
+                        <a href="createsg.html"> Find a Study Group </a>
+                        <a href="joinsg.html"> Join a Study Group </a>
+
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Tutor </button>
+                    <div class="dropdown-content">
+                        <a href="findt.html"> Create a Tutor </a>
+                        <a href="tutorprofiles.html"> Tutor Profiles </a>
+                    </div>
+                </div>
             </div>
-            <div class="navright" id="navright"></div>
+            <div class ="navright" id="navright">
+                <a href="login.html" class="button">Login</a>
+                <a href="signin.html" class="nav-link">Sign up</a>
+            </div>
         </div>
 
         <div class="bodycontent">
             <h1>Find a Tutor</h1>
             <p>Search for available tutors by subject and availability.</p>
-            <div class="screenshot" style="height:160px;display:flex;align-items:center;justify-content:center;margin-top:12px">Screenshot placeholder — Tutor search and filters</div>
+            <div style="margin-top:12px">
+                <input id="tutorSearch" placeholder="Filter by subject or name" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px">
+                <div id="tutorList" class="tutor-grid" style="margin-top:12px"></div>
+            </div>
         </div>
 
         <script src="scripts/main.js" defer></script>

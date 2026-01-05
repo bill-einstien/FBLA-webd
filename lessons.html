@@ -3,21 +3,60 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Lessons</title>
+        <title>Cheminuity — Lessons</title>
         <link rel="stylesheet" href="Style.css">
     </head>
     <body>
         <div class="navbar">
             <div class="navleft">
-                <a href="index.html">Home</a>
+                <a href="index.html" class="brand">Cheminuity</a>
+                <div class="dropdown">
+                    <button class="dropbtn"> Dashboard </button>
+                    <div class="dropdown-content">
+                        <a href="progress.html"> Progress </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"> Content </button>
+                    <div class="dropdown-content">
+                        <a href="lessons.html"> Lessons </a>
+                        <a href="quizzes.html"> Quizzes </a>
+                        <a href="videos.html"> Videos </a>
+                        <a href="resources.html"> Resources </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"> Study Groups</button>
+                    <div class="dropdown-content">
+                        <a href="createsg.html"> Find a Study Group </a>
+                        <a href="joinsg.html"> Join a Study Group </a>
+
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Tutor </button>
+                    <div class="dropdown-content">
+                        <a href="findt.html"> Create a Tutor </a>
+                        <a href="tutorprofiles.html"> Tutor Profiles </a>
+                    </div>
+                </div>
             </div>
-            <div class="navright" id="navright"></div>
+            <div class ="navright" id="navright">
+                <a href="login.html" class="button">Login</a>
+                <a href="signin.html" class="nav-link">Sign up</a>
+            </div>
         </div>
 
-        <div class="bodycontent">
+        <div class="bodycontent container">
             <h1>Lessons</h1>
-            <p>List of units and lessons (placeholder).</p>
-            <div class="screenshot" style="height:220px;display:flex;align-items:center;justify-content:center">Screenshot placeholder — Lessons list</div>
+            <p class="lead">Browse units covering atoms, stoichiometry, bonding, reactions, and lab skills — each unit contains short lessons and a quick quiz.</p>
+            <div class="screenshot" style="height:220px;display:flex;align-items:center;justify-content:center">
+                <div style="text-align:center">
+                    <strong>Featured unit: Atoms & Subatomic Particles</strong>
+                    <p style="margin-top:8px">Learn the structure of atoms, isotopes, and how subatomic particles determine chemical behavior.</p>
+                    <p style="margin-top:8px"><a href="lesson-detail.html?id=1-1" class="cta-btn">Start unit →</a></p>
+                </div>
+            </div>
 
             <section style="margin-top:18px">
                 <h3>Sample lessons</h3>

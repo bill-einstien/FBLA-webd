@@ -3,21 +3,75 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Resources</title>
+        <title>Cheminuity — Resources</title>
         <link rel="stylesheet" href="Style.css">
     </head>
     <body>
         <div class="navbar">
             <div class="navleft">
-                <a href="index.html">Home</a>
+                <a href="index.html" class="brand">Cheminuity</a>
+                <div class="dropdown">
+                    <button class="dropbtn"> Dashboard </button>
+                    <div class="dropdown-content">
+                        <a href="progress.html"> Progress </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"> Content </button>
+                    <div class="dropdown-content">
+                        <a href="lessons.html"> Lessons </a>
+                        <a href="quizzes.html"> Quizzes </a>
+                        <a href="videos.html"> Videos </a>
+                        <a href="resources.html"> Resources </a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn"> Study Groups</button>
+                    <div class="dropdown-content">
+                        <a href="createsg.html"> Find a Study Group </a>
+                        <a href="joinsg.html"> Join a Study Group </a>
+
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Tutor </button>
+                    <div class="dropdown-content">
+                        <a href="findt.html"> Create a Tutor </a>
+                        <a href="tutorprofiles.html"> Tutor Profiles </a>
+                    </div>
+                </div>
             </div>
-            <div class="navright" id="navright"></div>
+            <div class ="navright" id="navright">
+                <a href="login.html" class="button">Login</a>
+                <a href="signin.html" class="nav-link">Sign up</a>
+            </div>
         </div>
 
-        <div class="bodycontent">
+        <div class="bodycontent container">
             <h1>Resources</h1>
-            <div class="screenshot" style="height:140px;display:flex;align-items:center;justify-content:center">Screenshot placeholder — Resources</div>
-            <p style="margin-top:12px">Links to PDFs, external readings, and cheat sheets.</p>
+            <p style="margin-top:12px">PDFs, reference sheets, simulations, and lab safety guides for chemistry topics.</p>
+            <div class="cards-grid">
+                <div class="resource-card">
+                    <h4>Stoichiometry Cheat Sheet</h4>
+                    <p class="lesson-excerpt">Quick reference for mole calculations, dimensional analysis, and common conversions. <small>PDF</small></p>
+                    <p style="margin-top:8px"><a href="#" class="cta-btn">Open</a></p>
+                </div>
+                <div class="resource-card">
+                    <h4>Interactive Periodic Table</h4>
+                    <p class="lesson-excerpt">Explore element properties, atomic trends, and electron configurations with an interactive tool.</p>
+                    <p style="margin-top:8px"><a href="#" class="cta-btn">Open</a></p>
+                </div>
+                <div class="resource-card">
+                    <h4>Atomic Structure Guide</h4>
+                    <p class="lesson-excerpt">Notes and diagrams covering protons, neutrons, electrons, isotopes, and models of the atom.</p>
+                    <p style="margin-top:8px"><a href="#" class="cta-btn">Open</a></p>
+                </div>
+                <div class="resource-card">
+                    <h4>Lab Safety & Techniques</h4>
+                    <p class="lesson-excerpt">Essential safety rules, common equipment, and best practices for successful labs.</p>
+                    <p style="margin-top:8px"><a href="#" class="cta-btn">Open</a></p>
+                </div>
+            </div>
         </div>
 
         <script src="scripts/main.js" defer></script>

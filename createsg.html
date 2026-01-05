@@ -9,19 +9,73 @@
     <body>
         <div class="navbar">
             <div class="navleft">
-                <a href="index.html">Home</a>
+                <a href="index.html" class="brand">Cheminuity</a>
+
+                <div class="dropdown">
+                    <button class="dropbtn"> Dashboard  </button>
+                    <div class="dropdown-content">
+                        <a href="progress.html"> Progress </a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn"> Content  </button>
+                    <div class="dropdown-content">
+                        <a href="lessons.html"> Lessons </a>
+                        <a href="quizzes.html"> Quizzes </a>
+                        <a href="videos.html"> Videos </a>
+                        <a href="resources.html"> Resources </a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn"> Study Groups</button>
+                    <div class="dropdown-content">
+                        <a href="createsg.html"> Create a Study Group </a>
+                        <a href="joinsg.html"> Join a Study Group </a>
+
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Tutor </button>
+                    <div class="dropdown-content">
+                        <a href="findt.html"> Create a Tutor </a>
+                        <a href="tutorprofiles.html"> Tutor Profiles </a>
+                    </div>
+                </div>
             </div>
-            <div class="navright" id="navright"></div>
+
+            <div class ="navright" id="navright">
+                <a href="login.html" class="button">Login</a>
+                <a href="signin.html" class="nav-link">Sign up</a>
+            </div>
         </div>
 
         <div class="bodycontent">
             <h1>Create Study Group</h1>
-            <div class="screenshot" style="height:140px;display:flex;align-items:center;justify-content:center">Screenshot placeholder — Create group form</div>
+            <div class="screenshot" style="height:140px;display:flex;align-items:center;justify-content:center">
+                <div style="text-align:center">
+                    <strong>Example group</strong>
+                    <p style="margin-top:8px">Stoichiometry Practice — Next meeting: Jan 14 • 5:00 PM</p>
+                </div>
+            </div>
             <p style="margin-top:12px">Form to set group name, subject, schedule, and privacy.</p>
 
-            <form id="createGroupForm" class="group-form" style="margin-top:12px">
+            <form id="createGroupForm" class="group-form resource-card" style="margin-top:12px">
                 <label>Group name<br><input id="groupName" type="text" placeholder="e.g. Stoichiometry Study"></label><br>
                 <label>Subject<br><input id="groupSubject" type="text" placeholder="Chemistry"></label><br>
+                <label>Next meeting date<br><input id="meetingDate" type="date"></label><br>
+                <label>Next meeting time<br><input id="meetingTime" type="time"></label><br>
+                <label>Recurrence<br>
+                  <select id="meetingRecurrence">
+                    <option value="none">None</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="biweekly">Bi-weekly</option>
+                    <option value="monthly">Monthly</option>
+                  </select>
+                </label><br>
+                <label>Meeting link (optional)<br><input id="meetingLink" type="text" placeholder="Zoom/Google Meet link"></label><br>
                 <input type="submit" value="Create group" class="primary-btn" style="margin-top:8px">
             </form>
         </div>

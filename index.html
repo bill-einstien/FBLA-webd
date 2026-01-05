@@ -3,15 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home</title>
+        <title>Cheminuity — Learn Chemistry</title>
         <link rel="stylesheet" type="text/css" href="Style.css">
     </head>
 
     <body>
         <div class="navbar">
-            <div class="navleft">
+                <div class="navleft">
 
-                <a href="index.html">Home</a>
+                <a href="index.html" class="brand">Cheminuity</a>
 
                 <div class="dropdown">
                     <button class="dropbtn"> Dashboard  </button>
@@ -33,7 +33,7 @@
                 <div class="dropdown">
                     <button class="dropbtn"> Study Groups</button>
                     <div class="dropdown-content">
-                        <a href="createsg.html"> Find a Study Group </a>
+                        <a href="createsg.html"> Create a Study Group </a>
                         <a href="joinsg.html"> Join a Study Group </a>
 
                     </div>
@@ -42,7 +42,7 @@
                     <div class="dropdown">
                         <button class="dropbtn">Tutor </button>
                         <div class="dropdown-content">
-                            <a href="findt.html"> Find a Tutor </a>
+                            <a href="findt.html"> Create a Tutor </a>
                             <a href="tutorprofiles.html"> Tutor Profiles </a>
                         </div>
                     </div> 
@@ -64,7 +64,10 @@
                         <a class="cta-btn cta-outline" href="findt.html">Find a Tutor</a>
                     </p>
                 </div>
-                <div class="hero-media screenshot" style="height:260px;display:flex;align-items:center;justify-content:center">Screenshot placeholder — Landing highlight</div>
+                <div class="hero-media screenshot" style="height:260px;display:flex;align-items:center;justify-content:center" aria-hidden="false">
+                    <img id="heroImage" src="images/chem classroom.jpeg" alt="Cheminuity hero image" style="max-width:100%;max-height:100%;border-radius:8px;display:block">
+                </div>
+                <div style="font-size:12px;color:#6b6b7a;margin-top:8px;">Tip: Replace <code>images/hero-placeholder.svg</code> with your image (same path/name).</div>
             </section>
 
             <section class="feature-grid">

@@ -10,7 +10,7 @@
     <body>
         <div class="navbar">
             <div class="navleft">
-                <a href="index.html">Home</a>
+                <a href="index.html" class="brand">Cheminuity</a>
             </div>
         </div>
 
@@ -25,6 +25,12 @@
 
                 <label for="confirm">Confirm Password</label>
                 <input id="confirm" name="confirm" type="password" placeholder="Confirm password" required>
+
+                <fieldset style="margin-top:10px">
+                    <legend>Account type</legend>
+                    <label><input type="radio" name="role" value="student" checked> Student</label>
+                    <label style="margin-left:12px"><input type="radio" name="role" value="tutor"> Tutor</label>
+                </fieldset>
 
                 <div class="form-message" aria-live="polite"></div>
                 <input type="submit" value="Sign Up" class="primary-btn">
