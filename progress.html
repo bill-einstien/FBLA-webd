@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Progress</title>
+        <link rel="stylesheet" href="Style.css">
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navleft">
+                <a href="index.html">Home</a>
+            </div>
+            <div class="navright" id="navright"></div>
+        </div>
+
+        <div class="bodycontent container">
+            <h1>Dashboard / Progress</h1>
+            <div class="dashboard-grid" style="display:flex;gap:16px;margin-top:12px;align-items:flex-start">
+                <div class="card" style="flex:1">
+                    <h3>Overall progress</h3>
+                    <div style="margin-top:8px">Completed: <strong id="progressPercent">0%</strong></div>
+                    <div class="progress-bar" style="margin-top:8px"><i id="progressBarFill"></i></div>
+                    <h4 style="margin-top:12px">Completed lessons</h4>
+                    <ul id="completedList"><li>No lessons completed yet</li></ul>
+                </div>
+                <div class="card" style="width:320px">
+                    <h3>Recent activity</h3>
+                    <ul id="recentActivity"><li>No recent activity</li></ul>
+                    <h3 style="margin-top:12px">Badges</h3>
+                    <p>No badges yet — complete lessons to earn badges.</p>
+                </div>
+            </div>
+        </div>
+
+        <script src="scripts/main.js" defer></script>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Quizzes</title>
+        <link rel="stylesheet" href="Style.css">
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navleft">
+                <a href="index.html">Home</a>
+            </div>
+            <div class="navright" id="navright"></div>
+        </div>
+
+        <div class="bodycontent">
+            <h1>Quizzes</h1>
+            <div class="screenshot" style="height:180px;display:flex;align-items:center;justify-content:center">Screenshot placeholder — Quizzes list</div>
+            <p style="margin-top:12px">Each lesson can include a short quiz.</p>
+
+            <section class="quiz" style="margin-top:18px">
+                <h3>Sample Quiz — Lesson 1.1</h3>
+                <p>Which particle has a positive charge?</p>
+                <label><input type="radio" name="q1" value="proton"> Proton</label><br>
+                <label><input type="radio" name="q1" value="electron"> Electron</label><br>
+                <label><input type="radio" name="q1" value="neutron"> Neutron</label><br>
+                <button id="checkQuiz" class="primary-btn" style="margin-top:8px">Check Answer</button>
+                <div id="quizResult" class="form-message" aria-live="polite"></div>
+            </section>
+        </div>
+
+        <script src="scripts/main.js" defer></script>
+    </body>
+</html>

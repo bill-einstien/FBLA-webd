@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Create Study Group</title>
+        <link rel="stylesheet" href="Style.css">
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navleft">
+                <a href="index.html">Home</a>
+            </div>
+            <div class="navright" id="navright"></div>
+        </div>
+
+        <div class="bodycontent">
+            <h1>Create Study Group</h1>
+            <div class="screenshot" style="height:140px;display:flex;align-items:center;justify-content:center">Screenshot placeholder — Create group form</div>
+            <p style="margin-top:12px">Form to set group name, subject, schedule, and privacy.</p>
+
+            <form id="createGroupForm" class="group-form" style="margin-top:12px">
+                <label>Group name<br><input id="groupName" type="text" placeholder="e.g. Stoichiometry Study"></label><br>
+                <label>Subject<br><input id="groupSubject" type="text" placeholder="Chemistry"></label><br>
+                <input type="submit" value="Create group" class="primary-btn" style="margin-top:8px">
+            </form>
+        </div>
+
+        <script src="scripts/main.js" defer></script>
+    </body>
+</html>

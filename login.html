@@ -1,41 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="Style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="Style.css">
+    </head>
 
-<body>
+    <body>
 
         <div class="navbar">
             <div class="navleft">
-                <a href="../index.html">Home</a>
+                <a href="index.html">Home</a>
             </div>
         </div>
-        
-</body>
 
-<body>
+        <div class="signinbox">
+            <h1>Login</h1>
+            <form id="loginForm" novalidate>
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" placeholder="Enter username" required>
 
-    <div class="signinbox">
-        <h1>Login</h1>
-        <form id="loginForm" novalidate>
-            <label for="username">Username</label>
-            <input id="username" name="username" type="text" placeholder="Enter username" required>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" placeholder="Enter password" required>
 
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" placeholder="Enter password" required>
+                <div class="form-message" aria-live="polite"></div>
+                <input type="submit" value="Login" class="primary-btn">
+                <p class="small"><a href="#">Forgot your password?</a></p>
+                <p class="small"><a href="signin.html">Don't have an account? Sign up</a></p>
+            </form>
+        </div>
 
-            <div class="form-message" aria-live="polite"></div>
-            <input type="submit" value="Login" class="primary-btn">
-            <p class="small"><a href="#">Forgot your password?</a></p>
-            <p class="small"><a href="signin.html">Don't have an account? Sign up</a></p>
-        </form>
-    </div>
+        <script src="scripts/main.js" defer></script>
 
-    <script src="scripts/main.js" defer></script>
-
-</body>
+    </body>
 </html>
