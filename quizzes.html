@@ -10,36 +10,10 @@
         <div class="navbar">
             <div class="navleft">
                 <a href="index.html" class="brand">Cheminuity</a>
-                <div class="dropdown">
-                    <button class="dropbtn"> Dashboard </button>
-                    <div class="dropdown-content">
-                        <a href="progress.html"> Progress </a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn"> Content </button>
-                    <div class="dropdown-content">
-                        <a href="lessons.html"> Lessons </a>
-                        <a href="quizzes.html"> Quizzes </a>
-                        <a href="videos.html"> Videos </a>
-                        <a href="resources.html"> Resources </a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn"> Study Groups</button>
-                    <div class="dropdown-content">
-                        <a href="createsg.html"> Find a Study Group </a>
-                        <a href="joinsg.html"> Join a Study Group </a>
-
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn">Tutor </button>
-                    <div class="dropdown-content">
-                        <a href="findt.html"> Create a Tutor </a>
-                        <a href="tutorprofiles.html"> Tutor Profiles </a>
-                    </div>
-                </div>
+                <a href="dashboard.html" class="navbar-link">Dashboard</a>
+                <a href="content.html" class="navbar-link">Content</a>
+                <a href="study-groups.html" class="navbar-link">Study Groups</a>
+                <a href="tutors.html" class="navbar-link">Tutor</a>
             </div>
             <div class ="navright" id="navright">
                 <a href="login.html" class="button">Login</a>
@@ -49,21 +23,21 @@
 
         <div class="bodycontent">
             <h1>Quizzes</h1>
-            <div class="screenshot" style="height:180px;display:flex;align-items:center;justify-content:center">
-                <div style="text-align:center">
+            <div class="screenshot screenshot-lg">
+                <div class="text-center">
                     <strong>Practice Quizzes</strong>
-                    <p style="margin-top:8px">Short quizzes per lesson to test recall and reinforce concepts — timed or untimed.</p>
+                    <p class="mt-8">Short quizzes per lesson to test recall and reinforce concepts — timed or untimed.</p>
                 </div>
             </div>
-            <p style="margin-top:12px">Each lesson can include a short quiz.</p>
+            <p class="mt-12">Each lesson can include a short quiz.</p>
 
-            <section class="quiz" style="margin-top:18px">
+            <section class="quiz mt-18">
                 <h3>Sample Quiz — Lesson 1.1</h3>
                 <p>Which particle has a positive charge?</p>
                 <label><input type="radio" name="q1" value="proton"> Proton</label><br>
                 <label><input type="radio" name="q1" value="electron"> Electron</label><br>
                 <label><input type="radio" name="q1" value="neutron"> Neutron</label><br>
-                <button id="checkQuiz" class="primary-btn" style="margin-top:8px">Check Answer</button>
+                <button id="checkQuiz" class="primary-btn mt-8">Check Answer</button>
                 <div id="quizResult" class="form-message" aria-live="polite"></div>
             </section>
         </div>

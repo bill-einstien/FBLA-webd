@@ -10,36 +10,10 @@
         <div class="navbar">
             <div class="navleft">
                 <a href="index.html" class="brand">Cheminuity</a>
-                <div class="dropdown">
-                    <button class="dropbtn"> Dashboard </button>
-                    <div class="dropdown-content">
-                        <a href="progress.html"> Progress </a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn"> Content </button>
-                    <div class="dropdown-content">
-                        <a href="lessons.html"> Lessons </a>
-                        <a href="quizzes.html"> Quizzes </a>
-                        <a href="videos.html"> Videos </a>
-                        <a href="resources.html"> Resources </a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn"> Study Groups</button>
-                    <div class="dropdown-content">
-                        <a href="createsg.html"> Find a Study Group </a>
-                        <a href="joinsg.html"> Join a Study Group </a>
-
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn">Tutor </button>
-                    <div class="dropdown-content">
-                        <a href="findt.html"> Create a Tutor </a>
-                        <a href="tutorprofiles.html"> Tutor Profiles </a>
-                    </div>
-                </div>
+                <a href="dashboard.html" class="navbar-link">Dashboard</a>
+                <a href="content.html" class="navbar-link">Content</a>
+                <a href="study-groups.html" class="navbar-link">Study Groups</a>
+                <a href="tutors.html" class="navbar-link">Tutor</a>
             </div>
             <div class ="navright" id="navright">
                 <a href="login.html" class="button">Login</a>
@@ -50,9 +24,9 @@
         <div class="bodycontent container">
             <h1 id="lessonTitle">Lesson</h1>
             <p id="lessonContent">This lesson introduces atomic structure — learn about protons, neutrons, electrons, and how isotopes differ. Expect a short interactive diagram and a 5-question quiz at the end.</p>
-            <section id="objectives" style="margin-top:12px"><h3>Learning objectives</h3><ul id="objectiveList"><li>Understand atomic structure</li><li>Identify isotopes and ions</li></ul></section>
-            <section id="lessonResources" style="margin-top:12px"><h3>Resources</h3><ul id="resourceList"><li><a href="#">Reference sheet: Atoms</a></li></ul></section>
-            <p style="margin-top:12px"><button id="lessonMark" class="mark-btn" aria-pressed="false">Mark complete</button> <a href="lessons.html" style="margin-left:8px">Back to lessons</a></p>
+            <section id="objectives" class="mt-12"><h3>Learning objectives</h3><ul id="objectiveList"><li>Understand atomic structure</li><li>Identify isotopes and ions</li></ul></section>
+            <section id="lessonResources" class="mt-12"><h3>Resources</h3><ul id="resourceList"><li><a href="#">Reference sheet: Atoms</a></li></ul></section>
+            <p class="mt-12"><button id="lessonMark" class="mark-btn" aria-pressed="false">Mark complete</button> <a href="lessons.html" class="ml-8">Back to lessons</a></p>
         </div>
 
         <script src="scripts/main.js" defer></script>

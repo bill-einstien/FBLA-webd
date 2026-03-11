@@ -10,36 +10,10 @@
         <div class="navbar">
             <div class="navleft">
                 <a href="index.html" class="brand">Cheminuity</a>
-                <div class="dropdown">
-                    <button class="dropbtn"> Dashboard </button>
-                    <div class="dropdown-content">
-                        <a href="progress.html"> Progress </a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn"> Content </button>
-                    <div class="dropdown-content">
-                        <a href="lessons.html"> Lessons </a>
-                        <a href="quizzes.html"> Quizzes </a>
-                        <a href="videos.html"> Videos </a>
-                        <a href="resources.html"> Resources </a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn"> Study Groups</button>
-                    <div class="dropdown-content">
-                        <a href="createsg.html"> Find a Study Group </a>
-                        <a href="joinsg.html"> Join a Study Group </a>
-
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn">Tutor </button>
-                    <div class="dropdown-content">
-                        <a href="findt.html"> Create a Tutor </a>
-                        <a href="tutorprofiles.html"> Tutor Profiles </a>
-                    </div>
-                </div>
+                <a href="dashboard.html" class="navbar-link">Dashboard</a>
+                <a href="content.html" class="navbar-link">Content</a>
+                <a href="study-groups.html" class="navbar-link">Study Groups</a>
+                <a href="tutors.html" class="navbar-link">Tutor</a>
             </div>
             <div class ="navright" id="navright">
                 <a href="login.html" class="button">Login</a>
@@ -51,14 +25,14 @@
             <h1>Profile</h1>
             <div id="profileArea">
                 <p>Welcome back — here is a snapshot of your progress.</p>
-                <div class="screenshot" style="height:120px;display:flex;align-items:center;justify-content:center;margin-top:12px">
-                    <div style="text-align:center">
+                <div class="screenshot screenshot-sm mt-12">
+                    <div class="text-center">
                         <strong>Profile summary</strong>
-                        <p style="margin-top:8px">Completed lessons: <span id="profileCompleted">0</span> • Suggested next lesson: <em>Isotopes & Ions</em></p>
+                        <p class="mt-8">Completed lessons: <span id="profileCompleted">0</span> • Suggested next lesson: <em>Isotopes & Ions</em></p>
                     </div>
                 </div>
             </div>
-            <div style="margin-top:14px;">
+            <div class="mt-14">
                 <button id="logoutNow" class="primary-btn">Logout</button>
             </div>
         </div>
